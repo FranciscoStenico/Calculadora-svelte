@@ -8,5 +8,6 @@
     flex-direction: row-reverse;
     width: 100%;
     justify-content: space-between;
+    gap: 0.5rem;
   }
 </style>
