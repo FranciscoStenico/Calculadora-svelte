@@ -1,9 +1,9 @@
 <script lang="ts">
-  export let value: number | string;
+  export let value: string;
   export let size: number = 1;
   export let emphasis: boolean = false;
   export let operator: boolean = false;
-  export let onClick: (value: number | string) => void = () => {};
+  export let onClick: (value: string) => void = () => {};
 
   export const buttonSize = (num: number) => {
     switch (num) {
@@ -25,7 +25,7 @@
   class:operator
   on:click={() => onClick(value)}
 >
-  {value}
+  {value.replace('.', ',').replace('*', 'x')}
 </button>
 
 <style type="text/scss">

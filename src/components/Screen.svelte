@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let displayText: string;
+  export let displayText: string = '0';
 
   const handleFontSize = () => {
     const length = displayText.length;

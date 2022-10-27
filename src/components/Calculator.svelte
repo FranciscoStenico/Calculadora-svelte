@@ -1,52 +1,47 @@
 <script lang="ts">
+  import { ReactiveCalculator } from '../models/useState.model';
   import Button from './Button.svelte';
   import Row from './Row.svelte';
   import Screen from './Screen.svelte';
 
-  let entry: string = '0';
-  let memoNumber: number = 0;
-  let memo: string[] = [];
+  let calc = new ReactiveCalculator();
 
-  const allClear = (_: string) => {
-    entry = 'All clear!';
-    setTimeout(() => {
-      entry = '0';
-    }, 1000);
-    memoNumber = 0;
-    memo = [];
-  };
+  const inputValue = (value: string) => (calc = calc.addChar(value));
+  const inputOperator = (value: string) => (calc = calc.calculate(value));
+  const inputComma = () => (calc = calc.addCommas());
+  const allClear = () => (calc = calc.resetInstance());
 </script>
 
 <main class="calculator">
   <Row>
-    <Button value="." size={2} operator />
-    <Button value="0" size={2} />
+    <Button onClick={inputComma} value="." size={2} operator />
+    <Button onClick={inputValue} value="0" size={2} />
   </Row>
   <Row>
-    <Button value="=" emphasis />
-    <Button value="3" />
-    <Button value="2" />
-    <Button value="1" />
+    <Button onClick={inputOperator} value="=" emphasis />
+    <Button onClick={inputValue} value="3" />
+    <Button onClick={inputValue} value="2" />
+    <Button onClick={inputValue} value="1" />
   </Row>
   <Row>
-    <Button value="+" operator />
-    <Button value="6" />
-    <Button value="5" />
-    <Button value="4" />
+    <Button onClick={inputOperator} value="+" operator />
+    <Button onClick={inputValue} value="6" />
+    <Button onClick={inputValue} value="5" />
+    <Button onClick={inputValue} value="4" />
   </Row>
   <Row>
-    <Button value="x" operator />
-    <Button value="9" />
-    <Button value="8" />
-    <Button value="7" />
+    <Button onClick={inputOperator} value="*" operator />
+    <Button onClick={inputValue} value="9" />
+    <Button onClick={inputValue} value="8" />
+    <Button onClick={inputValue} value="7" />
   </Row>
   <Row>
-    <Button value=":" operator />
-    <Button value="-" operator />
+    <Button onClick={inputOperator} value="/" operator />
+    <Button onClick={inputOperator} value="-" operator />
     <Button onClick={allClear} size={2} value="AC" emphasis />
   </Row>
   <Row>
-    <Screen displayText={entry} />
+    <Screen displayText={calc.value} />
   </Row>
 </main>
 
